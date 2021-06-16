@@ -21,6 +21,4 @@ app.get('/plants/:id', (req, res) => {
     res.json(plant)
 })
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+module.exports = app;
