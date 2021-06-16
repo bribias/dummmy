@@ -1,3 +1,9 @@
+
+const app = require('../server.js');
+const supertest = require('supertest');
+const request = supertest(app);
+// const plants = require('../data.js');
+
 const plants = [
     fern = {
         id: 1,
@@ -48,4 +54,25 @@ const plants = [
     }
 ]
 
-module.exports = plants;
+it('responds with all the plants', async()  => {
+
+    const response = await request.get('/plants')
+
+    expect(response.status).toBe(200)
+    expect(response.body).toEqual(plants)
+})
+
+it('/id responds with single plant', async() => {
+
+    const response = await request.get('/plants/5')
+    const money = {
+        id: 5,
+        species: 'Money Tree',
+        image: 'money.jpeg',
+        description: 'Grows best in a shady spot (or winter windowsill) with weekly watering.',
+        watering: 2
+    }
+
+    expect(response.status).toBe(200)
+    expect(response.body).toEqual(money)
+})
